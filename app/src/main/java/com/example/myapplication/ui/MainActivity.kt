@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Constants
 import com.example.myapplication.R
 import com.example.myapplication.adapter.CarAdapter
 import com.example.myapplication.api.ApiService
@@ -26,8 +27,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         val retrofit = Retrofit.Builder()
-//            .baseUrl("http://192.168.1.132:8080")
-            .baseUrl("http://172.20.10.2:8080")
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         api = retrofit.create(ApiService::class.java)

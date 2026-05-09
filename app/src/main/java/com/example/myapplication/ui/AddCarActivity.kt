@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapplication.Constants
 import com.example.myapplication.R
 import com.example.myapplication.api.ApiService
 import com.example.myapplication.model.Car
@@ -25,7 +26,7 @@ class AddCarActivity : AppCompatActivity() {
         val btnSave = findViewById<Button>(R.id.btnSave)
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://172.20.10.2:8080")
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
