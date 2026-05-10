@@ -25,4 +25,20 @@ class CarViewModel(private val apiService: ApiService) : ViewModel() {
             }
         })
     }
+    fun deleteCar(carId: Long, onResult: (Boolean) -> Unit) {
+        apiService.deleteCar(carId).enqueue(object : retrofit2.Callback<Void> {
+            override fun onResponse(call: retrofit2.Call<Void>, response: retrofit2.Response<Void>) {
+                if (response.isSuccessful) {
+                    onResult(true)
+
+                } else {
+                    onResult(false)
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<Void>, t: Throwable) {
+                onResult(false)
+            }
+        })
+    }
 }

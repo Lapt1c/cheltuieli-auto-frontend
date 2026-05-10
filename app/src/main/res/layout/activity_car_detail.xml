@@ -27,8 +27,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Număr înmatriculare"
+        android:text="Numar inmatriculare"
         android:textColor="#555555"
         android:textSize="18sp" />
 
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sterge Masina"
+        android:backgroundTint="#D32F2F"
+        android:textColor="#FFFFFF" />
 </LinearLayout>
