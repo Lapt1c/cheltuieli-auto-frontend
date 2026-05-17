@@ -1,13 +1,20 @@
 package com.example.myapplication.ui
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
 import com.example.myapplication.model.Expense
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.utils.ColorTemplate
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -75,12 +82,14 @@ class CarDetailActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onResume() {
         super.onResume()
         val masina = intent.getSerializableExtra("CHEIE_MASINA") as? com.example.myapplication.model.Car
 
         if (masina != null) {
             val tvExpenses = findViewById<TextView>(R.id.tvExpensesList)
+            val pieChart = findViewById<PieChart>(R.id.pieChart)
 
             val retrofit = Retrofit.Builder()
                 .baseUrl(com.example.myapplication.Constants.BASE_URL)
@@ -95,13 +104,42 @@ class CarDetailActivity : AppCompatActivity() {
                         val expenses = response.body()
                         if (expenses.isNullOrEmpty()) {
                             tvExpenses.text = "Nicio cheltuiala adaugata inca."
+                            pieChart?.visibility = View.GONE // Ascundem graficul
                         } else {
-                            // Construim textul pe care il vom afisa
+                            pieChart?.visibility = View.VISIBLE // Afisam graficul
+
+                            // 1. Textul simplu
                             var istoric = "Istoric Cheltuieli:\n\n"
                             for (exp in expenses) {
                                 istoric += "• ${exp.date} | ${exp.type} | ${exp.amount} RON\n  Desc: ${exp.description}\n\n"
                             }
                             tvExpenses.text = istoric
+
+                            // 2. Graficul PieChart
+                            val groupedExpenses = expenses.groupBy { it.type }
+                                .mapValues { entry -> entry.value.sumOf { it.amount } }
+
+                            val entries = ArrayList<PieEntry>()
+                            var totalGeneral = 0.0
+
+                            for ((type, totalAmount) in groupedExpenses) {
+                                entries.add(PieEntry(totalAmount.toFloat(), type.name))
+                                totalGeneral += totalAmount
+                            }
+
+                            val dataSet = PieDataSet(entries, "")
+                            dataSet.colors = ColorTemplate.MATERIAL_COLORS.toList()
+                            dataSet.valueTextSize = 14f
+                            dataSet.valueTextColor = Color.WHITE
+
+                            val data = PieData(dataSet)
+
+                            pieChart?.data = data
+                            pieChart?.description?.isEnabled = false
+                            pieChart?.centerText = "Total:\n${totalGeneral} RON"
+                            pieChart?.setCenterTextSize(16f)
+                            pieChart?.animateY(1000)
+                            pieChart?.invalidate()
                         }
                     }
                 }
