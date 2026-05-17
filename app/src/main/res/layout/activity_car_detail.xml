@@ -30,7 +30,20 @@
         android:text="Numar inmatriculare"
         android:textColor="#555555"
         android:textSize="18sp" />
-
+    <TextView
+        android:id="@+id/tvExpensesList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Se incarca cheltuielile..."
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+    <Button
+        android:id="@+id/btnAddExpense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Adauga Cheltuiala"
+        android:layout_marginBottom="16dp"/>
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="match_parent"
@@ -38,4 +51,5 @@
         android:text="Sterge Masina"
         android:backgroundTint="#D32F2F"
         android:textColor="#FFFFFF" />
+
 </LinearLayout>
