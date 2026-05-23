@@ -23,7 +23,7 @@ A native Android application built with Kotlin that helps users track their vehi
    dependencyResolutionManagement {
        repositories {
            google()
-           mavenCentral()
+           mavenCentral( )
            maven { url = uri("[https://jitpack.io](https://jitpack.io)") }
        }
    }
