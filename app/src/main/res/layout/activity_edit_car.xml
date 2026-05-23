@@ -33,7 +33,21 @@
         android:layout_height="wrap_content"
         android:hint="Numar inmatriculare"
         android:layout_marginBottom="24dp"/>
+    <EditText
+        android:id="@+id/etItpExpiration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Expirare ITP (ex: 2026-10-15)"
+        android:inputType="date"
+        android:layout_marginBottom="16dp"/>
 
+    <EditText
+        android:id="@+id/etRcaExpiration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Expirare RCA (ex: 2027-01-20)"
+        android:inputType="date"
+        android:layout_marginBottom="24dp"/>
     <Button
         android:id="@+id/btnUpdateCar"
         android:layout_width="match_parent"

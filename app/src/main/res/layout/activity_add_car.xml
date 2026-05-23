@@ -8,7 +8,21 @@
     <EditText android:id="@+id/etBrand" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Marcă (ex: Audi)" />
     <EditText android:id="@+id/etModel" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Model (ex: A5)" />
     <EditText android:id="@+id/etPlate" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Număr (ex: CJ 99 ABC)" />
+    <EditText
+        android:id="@+id/etItpExpiration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Expirare ITP (ex: 2026-10-15)"
+        android:inputType="date"
+        android:layout_marginBottom="16dp"/>
 
+    <EditText
+        android:id="@+id/etRcaExpiration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Expirare RCA (ex: 2027-01-20)"
+        android:inputType="date"
+        android:layout_marginBottom="24dp"/>
     <Button
         android:id="@+id/btnSave"
         android:layout_width="match_parent"

@@ -27,29 +27,37 @@ class EditCarActivity : AppCompatActivity() {
         val etBrand = findViewById<EditText>(R.id.etEditBrand)
         val etModel = findViewById<EditText>(R.id.etEditModel)
         val etPlate = findViewById<EditText>(R.id.etEditPlate)
+        val etItp = findViewById<EditText>(R.id.etItpExpiration)
+        val etRca = findViewById<EditText>(R.id.etRcaExpiration)
         val btnUpdate = findViewById<Button>(R.id.btnUpdateCar)
 
         // Completam automat campurile cu datele actuale ca sa le poti modifica
         etBrand.setText(masina.brand)
         etModel.setText(masina.model)
         etPlate.setText(masina.plateNumber)
+        etItp.setText(masina.itpExpiration ?: "")
+        etRca.setText(masina.rcaExpiration ?: "")
 
         btnUpdate.setOnClickListener {
             val updatedBrand = etBrand.text.toString().trim()
             val updatedModel = etModel.text.toString().trim()
             val updatedPlate = etPlate.text.toString().trim()
+            val updatedItp = etItp.text.toString().trim()
+            val updatedRca = etRca.text.toString().trim()
 
             if (updatedBrand.isEmpty() || updatedModel.isEmpty() || updatedPlate.isEmpty()) {
-                Toast.makeText(this, "Toate campurile sunt obligatorii!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Campurile principale sunt obligatorii!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Cream noul obiect cu datele modificate
+            // Cream noul obiect cu datele modificate, incluzand ITP si RCA
             val masinaActualizata = Car(
                 id = masina.id,
                 brand = updatedBrand,
                 model = updatedModel,
-                plateNumber = updatedPlate
+                plateNumber = updatedPlate,
+                itpExpiration = if (updatedItp.isEmpty()) null else updatedItp,
+                rcaExpiration = if (updatedRca.isEmpty()) null else updatedRca
             )
 
             val retrofit = Retrofit.Builder()

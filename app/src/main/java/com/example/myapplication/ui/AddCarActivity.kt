@@ -23,6 +23,8 @@ class AddCarActivity : AppCompatActivity() {
         val etBrand = findViewById<EditText>(R.id.etBrand)
         val etModel = findViewById<EditText>(R.id.etModel)
         val etPlate = findViewById<EditText>(R.id.etPlate)
+        val etItp = findViewById<EditText>(R.id.etItpExpiration)
+        val etRca = findViewById<EditText>(R.id.etRcaExpiration)
         val btnSave = findViewById<Button>(R.id.btnSave)
 
         val retrofit = Retrofit.Builder()
@@ -33,15 +35,27 @@ class AddCarActivity : AppCompatActivity() {
         val api = retrofit.create(ApiService::class.java)
 
         btnSave.setOnClickListener {
-            val brand = etBrand.text.toString()
-            val model = etModel.text.toString()
-            val plate = etPlate.text.toString()
+            val brand = etBrand.text.toString().trim()
+            val model = etModel.text.toString().trim()
+            val plate = etPlate.text.toString().trim()
+
+            // Citim datele AICI, dupa ce user-ul le-a scris si a apasat salvare
+            val itpStr = etItp.text.toString().trim()
+            val rcaStr = etRca.text.toString().trim()
 
             if (brand.isEmpty() || model.isEmpty() || plate.isEmpty()) {
                 Toast.makeText(this, "Te rog completează toate datele!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val newCar = Car(brand = brand, model = model, plateNumber = plate)
+
+            val newCar = Car(
+                brand = brand,
+                model = model,
+                plateNumber = plate,
+                itpExpiration = if (itpStr.isEmpty()) null else itpStr,
+                rcaExpiration = if (rcaStr.isEmpty()) null else rcaStr
+            )
+
             api.addCar(newCar).enqueue(object : Callback<Car> {
                 override fun onResponse(call: Call<Car>, response: Response<Car>) {
                     if (response.isSuccessful) {
