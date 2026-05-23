@@ -98,6 +98,12 @@ class CarDetailActivity : AppCompatActivity() {
 
             val apiService = retrofit.create(com.example.myapplication.api.ApiService::class.java)
 
+            val btnEditCar = findViewById<Button>(R.id.btnEditCar)
+            btnEditCar.setOnClickListener {
+                val intent = android.content.Intent(this, EditCarActivity::class.java)
+                intent.putExtra("CHEIE_MASINA", masina) // Trimitem toata masina mai departe
+                startActivity(intent)
+            }
             apiService.getExpenses(masina.id!!).enqueue(object : Callback<List<Expense>> {
                 override fun onResponse(call: Call<List<Expense>>, response: Response<List<Expense>>) {
                     if (response.isSuccessful) {

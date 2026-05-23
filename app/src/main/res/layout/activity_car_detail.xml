@@ -60,6 +60,12 @@
         android:text="Adauga Cheltuiala"
         android:layout_marginBottom="16dp"/>
     <Button
+        android:id="@+id/btnEditCar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Editeaza Masina"
+        android:layout_marginBottom="16dp"/>
+    <Button
         android:id="@+id/btnDelete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

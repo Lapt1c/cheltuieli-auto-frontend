@@ -23,8 +23,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.AddCarActivity" />
-        <activity android:name=".ui.CarDetailActivity" />
+        <activity android:name=".ui.CarDetailActivity" />a
         <activity android:name=".ui.AddExpenseActivity" />
+        <activity android:name=".ui.EditCarActivity" />
     </application>
 
 </manifest>
